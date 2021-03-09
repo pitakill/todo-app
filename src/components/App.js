@@ -1,9 +1,14 @@
 import React from 'react';
+import Header from './Header';
+import Form from './Form';
 
 function App() {
   return (
-    <div>
-      Hola
+    <div className="wrapper">
+      <div className="card frame">
+        <Header />
+        <Form />
+      </div>
     </div>
   );
 }
