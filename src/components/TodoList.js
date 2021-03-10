@@ -12,6 +12,8 @@ function TodoList(props) {
             key={i}
             done={e.done}
             title={e.title} 
+            deleteFn={e => props.deleteFn(e, i)}
+            toggleFn={e => props.toggleFn(e, i)}
           />
         )
       }
@@ -20,7 +22,9 @@ function TodoList(props) {
 };
 
 TodoList.propTypes = {
-  tasks: PropTypes.array
+  tasks: PropTypes.array,
+  deleteFn: PropTypes.func.isRequired,
+  toggleFn: PropTypes.func.isRequired
 }
 
 TodoList.defaultProps = {

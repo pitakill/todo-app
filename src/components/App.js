@@ -25,12 +25,30 @@ class App extends React.Component {
     })
   }
 
+  handleClickDelete = (e, index) => {
+    const todos = [...this.state.todos];
+    todos.splice(index, 1);
+
+    this.setState({ todos: todos });
+  }
+
+  handleClickToggleDone = (e, index) => {
+    const todos = [...this.state.todos];
+    todos[index].done = !todos[index].done;
+
+    this.setState({ todos });
+  }
+
   render() {
     return (
       <div className="wrapper">
         <div className="card frame">
           <Header counter={this.state.todos.length} />
-          <TodoList tasks={this.state.todos} />
+          <TodoList 
+            tasks={this.state.todos} 
+            toggleFn={this.handleClickToggleDone}
+            deleteFn={this.handleClickDelete}
+          />
           <Form />
           {
             this.state.showButton &&
