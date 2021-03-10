@@ -2,36 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/form.css';
 
-class Form extends React.Component {
-  state = { value: '' }
+function Form(props) {
+  // state = { value: '' }
+  const [value, setValue] = React.useState('');
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
+  const handleChange = (e) => {
+    // this.setState({ value: e.target.value });
+    setValue(e.target.value);
   }
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    this.props.addTaskFn(this.state.value);
+    // this.props.addTaskFn(this.state.value);
+    props.addTaskFn(value);
 
-    this.setState({ value: '' });
+    // this.setState({ value: '' });
+    setValue('');
   }
 
-  render () {
-    return (
-      <form onSubmit={this.handleSubmit} >
-        <input 
-          type='text'
-          className='input'
-          onChange={this.handleChange}
-          placeholder='Agrega una tarea'
-          value={this.state.value}
-        />
-        <button className='button'>Enviar</button>
-      </form>
-    )
-  };
-}
+  return (
+    <form onSubmit={handleSubmit} >
+      <input 
+        type='text'
+        className='input'
+        onChange={handleChange}
+        placeholder='Agrega una tarea'
+        value={value}
+      />
+      <button className='button'>Enviar</button>
+    </form>
+  )
+};
 
 Form.propTypes = {
   addTaskFn: PropTypes.func.isRequired
