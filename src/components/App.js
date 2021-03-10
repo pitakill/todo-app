@@ -5,23 +5,20 @@ import TodoList from './TodoList';
 import '../css/App.css';
 
 class App extends React.Component {
-  state = { todos: [], showButton: true }
+  state = { todos: [] }
 
-  handleClick = (e) => {
+  componentDidMount() {
     this.setState({
       todos: [
-        { title: "Tarea 1", done: true },
-        { title: "Tarea 2", done: false },
-        { title: "Tarea 3", done: true },
-        { title: "Tarea 4", done: false },
-        { title: "Tarea 5", done: true },
-        { title: "Tarea 6", done: false },
-        { title: "Tarea 7", done: true },
-        { title: "Tarea 8", done: false },
-        { title: "Tarea 9", done: true },
-        { title: "Tarea 10", done: false },
+        { title: "Sesión 1 (JSX)", done: true},
+        { title: "Sesión 2 (Estado y propiedades)", done: true },
+        { title: "Sesión 3 (Ciclo de vida)", done: true },
+        { title: "Sesión 4 (Hooks)", done: false },
+        { title: "Sesión 5 (Hooks)", done: false },
+        { title: "Sesión 6 (Rutas)", done: false },
+        { title: "Sesión 7 (PWA)", done: false },
+        { title: "Sesión 8 (Material UI)", done: false },
       ],
-      showButton: false,
     })
   }
 
@@ -39,6 +36,12 @@ class App extends React.Component {
     this.setState({ todos });
   }
 
+  addTask = (title) => {
+    this.setState({
+      todos : this.state.todos.concat([{ title, done: false }])
+    });
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -49,13 +52,7 @@ class App extends React.Component {
             toggleFn={this.handleClickToggleDone}
             deleteFn={this.handleClickDelete}
           />
-          <Form />
-          {
-            this.state.showButton &&
-              <button onClick={this.handleClick} className="button init">
-                Inicializar
-              </button>
-          }
+          <Form addTaskFn={this.addTask} />
         </div>
       </div>
     );
