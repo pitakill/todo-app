@@ -37,6 +37,13 @@ class App extends React.Component {
   }
 
   addTask = (title) => {
+    const exists = this.state.todos.find(e => title === e.title);
+
+    if (exists) {
+      alert(`La tarea "${title}" ya existe!`);
+      return
+    }
+
     this.setState({
       todos : this.state.todos.concat([{ title, done: false }])
     });
