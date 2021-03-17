@@ -12,8 +12,8 @@ function TodoList(props) {
             key={i}
             done={e.done}
             title={e.title} 
-            deleteFn={e => props.deleteFn(e, i)}
-            toggleFn={e => props.toggleFn(e, i)}
+            deleteFn={ev => props.deleteFn(ev, e.title)}
+            toggleFn={ev => props.toggleFn(ev, e.title)}
           />
         )
       }

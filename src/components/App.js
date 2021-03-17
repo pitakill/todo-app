@@ -36,23 +36,19 @@ function App() {
     ]);
   }, []);
 
-  const handleClickDelete = (e, index) => {
-    // const todos = [...this.state.todos];
+  const handleClickDelete = (e, title) => {
     const t = [...todos];
-    // todos.splice(index, 1);
-    t.splice(index, 1);
+    const index = t.findIndex(e => e.title === title);
+    if (-1 < index) t.splice(index, 1);
 
-    // this.setState({ todos: todos });
     setTodos(t);
   }
 
-  const handleClickToggleDone = (e, index) => {
-    // const todos = [...this.state.todos];
+  const handleClickToggleDone = (e, title) => {
     const t = [...todos];
-    // todos[index].done = !todos[index].done;
-    todos[index].done = !todos[index].done;
+    const index = t.findIndex(e => e.title === title)
+    if (-1 < index) t[index].done = !t[index].done;
 
-    // this.setState({ todos });
     setTodos(t);
   }
 
