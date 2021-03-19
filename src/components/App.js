@@ -4,36 +4,20 @@ import Form from './Form';
 import TodoList from './TodoList';
 import '../css/App.css';
 
+const URL = "http://localhost:4000/todos";
+
 function App() {
-  // state = { todos: [] }
   const [todos, setTodos] = React.useState([]);
   const [show, setShow] = React.useState(true);
 
-  // componentDidMount() {
-    // this.setState({
-      // todos: [
-        // { title: "Sesión 1 (JSX)", done: true},
-        // { title: "Sesión 2 (Estado y propiedades)", done: true },
-        // { title: "Sesión 3 (Ciclo de vida)", done: true },
-        // { title: "Sesión 4 (Hooks)", done: false },
-        // { title: "Sesión 5 (Hooks)", done: false },
-        // { title: "Sesión 6 (Rutas)", done: false },
-        // { title: "Sesión 7 (PWA)", done: false },
-        // { title: "Sesión 8 (Material UI)", done: false },
-      // ],
-    // })
-  // }
   React.useEffect(() => {
-    setTodos([
-      { title: "Sesión 1 (JSX)", done: true},
-      { title: "Sesión 2 (Estado y propiedades)", done: true },
-      { title: "Sesión 3 (Ciclo de vida)", done: true },
-      { title: "Sesión 4 (Hooks)", done: false },
-      { title: "Sesión 5 (Hooks)", done: false },
-      { title: "Sesión 6 (Rutas)", done: false },
-      { title: "Sesión 7 (PWA)", done: false },
-      { title: "Sesión 8 (Material UI)", done: false },
-    ]);
+    const getData = async () => {
+      const response = await fetch(URL);
+      const data = await response.json();
+      setTodos(data);
+    };
+
+    getData();
   }, []);
 
   const handleClickDelete = (e, title) => {
@@ -53,7 +37,6 @@ function App() {
   }
 
   const addTask = (title) => {
-    // const exists = this.state.todos.find(e => title === e.title);
     const exists = todos.find(e => title === e.title);
 
     if (exists) {
@@ -61,9 +44,6 @@ function App() {
       return
     }
 
-    // this.setState({
-      // todos : this.state.todos.concat([{ title, done: false }])
-    // });
     setTodos(todos.concat([{ title, done: false }]));
   }
 
