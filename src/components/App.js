@@ -24,12 +24,32 @@ function App() {
     getData();
   }, []);
 
-  const handleClickDelete = (e, title) => {
-    const t = [...todos];
-    const index = t.findIndex(e => e.title === title);
-    if (-1 < index) t.splice(index, 1);
+  const handleClickDelete = async (e, title) => {
+    // Otener el índice del elemento que se le hizo click
+    const el = todos.find(e => e.title === title)
+    // Verificar que en efecto exista en el `todos`
+    if (el === undefined) return
 
-    setTodos(t);
+    // Cambio en el servidor
+    const config = {
+      url: `${URL}/${el.id}`,
+      method: "DELETE"
+    };
+
+    try {
+      const response = await goToBackend(config)
+
+      if (!response.ok) throw new Error("Response not ok");
+
+      // UI
+      const t = [...todos];
+      const index = t.findIndex(element => element.id === el.id);
+      t.splice(index, 1);
+
+      setTodos(t);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const goToBackend = (config, data) => {
@@ -38,7 +58,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: data ? JSON.stringify(data) : null
     })
   }
 
