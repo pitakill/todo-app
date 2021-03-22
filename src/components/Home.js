@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import Header from './Header';
 import Form from './Form';
 import TodoList from './TodoList';
@@ -31,4 +32,4 @@ Home.propTypes = {
   addTask: PropTypes.func.isRequired,
 }
 
-export default Home;
+export default withRouter(Home);

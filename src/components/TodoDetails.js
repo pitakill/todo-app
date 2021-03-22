@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 function TodoDetails(props) {
   const [todo, setTodo] = React.useState({ title: "", details: [] });
@@ -44,4 +45,4 @@ TodoDetails.propTypes = {
   url: PropTypes.string.isRequired
 };
 
-export default TodoDetails;
+export default withRouter(TodoDetails);

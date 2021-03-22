@@ -132,9 +132,8 @@ function App() {
       <BrowserRouter>
         <div className="card frame">
           <Switch>
-            <Route path="/" exact render={props =>
+            <Route path="/" exact>
               <Home 
-                {...props}
                 filtered={filtered}
                 show={show}
                 setShow={setShow}
@@ -142,13 +141,10 @@ function App() {
                 handleClickDelete={handleClickDelete}
                 addTask={addTask}
               />
-            } />
-            <Route path="/details/:id" render={props =>
-              <TodoDetails 
-                {...props}
-                url={URL}
-              />
-            } />
+            </Route>
+            <Route path="/details/:id">
+              <TodoDetails url={URL} />
+            </Route>
             <Route component={NotFound} />
           </Switch>
         </div>
