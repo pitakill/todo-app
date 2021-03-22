@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import TodoDetails from './TodoDetails';
+import NotFound from './NotFound';
 import '../css/App.css';
 
 const URL = "http://localhost:4000/todos";
@@ -130,23 +131,26 @@ function App() {
     <div className="wrapper">
       <BrowserRouter>
         <div className="card frame">
-          <Route path="/" exact render={props =>
-            <Home 
-              {...props}
-              filtered={filtered}
-              show={show}
-              setShow={setShow}
-              handleClickToggleDone={handleClickToggleDone}
-              handleClickDelete={handleClickDelete}
-              addTask={addTask}
-            />
-          } />
-          <Route path="/details/:id" render={props =>
-            <TodoDetails 
-              {...props}
-              url={URL}
-            />
-          } />
+          <Switch>
+            <Route path="/" exact render={props =>
+              <Home 
+                {...props}
+                filtered={filtered}
+                show={show}
+                setShow={setShow}
+                handleClickToggleDone={handleClickToggleDone}
+                handleClickDelete={handleClickDelete}
+                addTask={addTask}
+              />
+            } />
+            <Route path="/details/:id" render={props =>
+              <TodoDetails 
+                {...props}
+                url={URL}
+              />
+            } />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </BrowserRouter>
     </div>
