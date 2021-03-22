@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import '../css/Todo.css';
 import Checkmark from './Checkmark';
 
 function Todo(props) {
+  const history = useHistory();
+  const handleClick = () => history.push(`/details/${props.id}`);
+
   return (
     <div className={`list-item ${props.done ? 'done' : ''}`}>
-      {props.title}
+      <span onClick={handleClick}>
+        {props.title}
+      </span>
       <div className="is-pulled-right">
         <Checkmark 
           toggleFn={props.toggleFn}
@@ -24,6 +30,7 @@ function Todo(props) {
 Todo.propTypes = {
   deleteFn: PropTypes.func.isRequired,
   done: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   toggleFn: PropTypes.func.isRequired
 }

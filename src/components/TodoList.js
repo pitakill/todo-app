@@ -7,9 +7,10 @@ function TodoList(props) {
   return (
     <div className="list-wrapper">
       {
-        props.tasks.map((e, i) => 
+        props.tasks.map(e => 
           <Todo
-            key={i}
+            key={e.id}
+            id={e.id}
             done={e.done}
             title={e.title} 
             deleteFn={ev => props.deleteFn(ev, e.title)}

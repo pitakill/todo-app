@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './Header';
-import Form from './Form';
-import TodoList from './TodoList';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Home from './Home';
+import TodoDetails from './TodoDetails';
 import '../css/App.css';
 
 const URL = "http://localhost:4000/todos";
@@ -128,19 +128,27 @@ function App() {
 
   return (
     <div className="wrapper">
-      <div className="card frame">
-        <Header
-          counter={filtered.length}
-          show={show}
-          toggleDone={setShow}
-        />
-        <TodoList 
-          tasks={filtered}
-          toggleFn={handleClickToggleDone}
-          deleteFn={handleClickDelete}
-        />
-        <Form addTaskFn={addTask} />
-      </div>
+      <BrowserRouter>
+        <div className="card frame">
+          <Route path="/" exact render={props =>
+            <Home 
+              {...props}
+              filtered={filtered}
+              show={show}
+              setShow={setShow}
+              handleClickToggleDone={handleClickToggleDone}
+              handleClickDelete={handleClickDelete}
+              addTask={addTask}
+            />
+          } />
+          <Route path="/details/:id" render={props =>
+            <TodoDetails 
+              {...props}
+              url={URL}
+            />
+          } />
+        </div>
+      </BrowserRouter>
     </div>
   )
 }
