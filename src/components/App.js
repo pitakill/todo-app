@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import Home from './Home';
 import TodoDetails from './TodoDetails';
 import NotFound from './NotFound';
@@ -128,28 +130,35 @@ function App() {
   const filtered = todos.filter(e => !e.done || e.done === show);
 
   return (
-    <div className="wrapper">
+    <Container>
       <BrowserRouter>
-        <div className="card frame">
-          <Switch>
-            <Route path="/" exact>
-              <Home 
-                filtered={filtered}
-                show={show}
-                setShow={setShow}
-                handleClickToggleDone={handleClickToggleDone}
-                handleClickDelete={handleClickDelete}
-                addTask={addTask}
-              />
-            </Route>
-            <Route path="/details/:id">
-              <TodoDetails url={URL} />
-            </Route>
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+        <Grid 
+          container
+          alignItems="center"
+          justify="center"
+          className="main"
+        >
+          <Grid item md={4} sm={6} xs={12} className="wrapper">
+            <Switch>
+              <Route path="/" exact>
+                <Home 
+                  filtered={filtered}
+                  show={show}
+                  setShow={setShow}
+                  handleClickToggleDone={handleClickToggleDone}
+                  handleClickDelete={handleClickDelete}
+                  addTask={addTask}
+                />
+              </Route>
+              <Route path="/details/:id">
+                <TodoDetails url={URL} />
+              </Route>
+              <Route component={NotFound} />
+            </Switch>
+          </Grid>
+        </Grid>
       </BrowserRouter>
-    </div>
+    </Container>
   )
 }
 
