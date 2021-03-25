@@ -1,36 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../css/form.css';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 function Form(props) {
-  // state = { value: '' }
   const [value, setValue] = React.useState('');
 
   const handleChange = (e) => {
-    // this.setState({ value: e.target.value });
     setValue(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // this.props.addTaskFn(this.state.value);
     props.addTaskFn(value);
 
-    // this.setState({ value: '' });
     setValue('');
   }
 
   return (
     <form onSubmit={handleSubmit} >
-      <input 
-        type='text'
-        className='input'
+      <TextField 
+        id="standard-basic"
+        label="Tarea a agregar"
         onChange={handleChange}
-        placeholder='Agrega una tarea'
         value={value}
+        fullWidth
       />
-      <button className='button'>Enviar</button>
+      <Button
+        color="primary"
+        type="submit"
+        fullWidth
+      >
+        Enviar
+      </Button>
     </form>
   )
 };

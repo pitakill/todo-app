@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import List from '@material-ui/core/List';
 import Todo from './Todo';
-import '../css/TodoList.css';
 
 function TodoList(props) {
   return (
-    <div className="list-wrapper">
+    <List>
       {
         props.tasks.map(e => 
           <Todo
@@ -18,7 +18,7 @@ function TodoList(props) {
           />
         )
       }
-    </div>
+    </List>
   )
 };
 

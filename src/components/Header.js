@@ -1,16 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShowHide from './ShowHide';
-import '../css/header.css';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 function Header(props) {
   return (
-    <div className="card-header">
-      <h1 className="card-header-title header">
+    <AppBar color="primary" align="center">
+      <Typography variant="h6">
         Hay {props.counter} tareas
-      </h1>
-      <ShowHide show={props.show} toggleDone={props.toggleDone} />
-    </div>
+      </Typography>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={props.show}
+            onChange={e => props.toggleDone(!props.show)}
+            name="checkedB"
+            color="secondary"
+          />
+        }
+        label={props.show ? "Todas" : "Por hacer"}
+      />
+    </AppBar>
   )
 };
 
